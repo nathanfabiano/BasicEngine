@@ -24,7 +24,7 @@ Game
  #include <iostream>
 
 //------------------------------------------- MUSIC -------------------------------------------------------
-Music::Music() : m_music(NULL)
+Music::Music() : m_music(nullptr)
 {
 
 }
@@ -66,7 +66,7 @@ void Music::Stop(int msToStop=1500)
 
 bool Music::IsOpen()
 {
-	if (m_music == NULL)
+	if (m_music == nullptr)
 	{
 		return false;
 	}
@@ -84,7 +84,7 @@ Music::~Music()
 
 //------------------------------------------- SPRITE ------------------------------------------------------
 
-Sprite::Sprite() : m_texture(NULL)
+Sprite::Sprite() : m_texture(nullptr)
 {
 
 }
@@ -114,7 +114,7 @@ void Sprite::Open(std::string file)
         SDL_Log("Unable to load texture: %s", SDL_GetError());
         //return 1;
 	}
-	SDL_QueryTexture(m_texture, NULL, NULL, &m_width, &m_height); //
+	SDL_QueryTexture(m_texture, nullptr, nullptr, &m_width, &m_height); //
 	SetClip(0, 0, m_width, m_height);
 }
 
@@ -141,7 +141,7 @@ void Sprite::Render(int x, int y)
 
 bool Sprite::IsOpen()
 {
-	if (m_texture == NULL)
+	if (m_texture == nullptr)
 	{
 		return false;
 	}
@@ -223,7 +223,7 @@ Game::Game(std::string title, int width, int height) : m_width(width), m_height(
 
 	//Cria a Janela do jogo
 	m_window = SDL_CreateWindow(m_title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, m_width, m_height, 0);
-	if (m_window == NULL)
+	if (m_window == nullptr)
 	{
 		SDL_Log("Could not create WINDOW: %s\n", SDL_GetError());
 		std::cout << "Unable to initialize SDL:";
@@ -232,7 +232,7 @@ Game::Game(std::string title, int width, int height) : m_width(width), m_height(
 
 	//Cria o Renderizador
 	m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED);
-	if (m_renderer == NULL)
+	if (m_renderer == nullptr)
 	{
 		SDL_Log("Could not create RENDERER: %s\n", SDL_GetError());
 		std::cout << "Unable to initialize SDL:";
