@@ -13,18 +13,8 @@ void Face::Damage(int damage)
 	m_hitpoints -= damage;
 	if (m_hitpoints <= 0)
 	{
-		m_associated.RequestDelete();
-		//search and play sound!
-	}
-}
-
-void Face::Damage(float damage)
-{
-	m_hitpoints -= (int)damage;
-	if (m_hitpoints <= 0)
-	{
-		m_associated.RequestDelete();
-		//search and play sound!
+		m_associated.GetComponent("Sound")->Play(1);
+		m_associated.RequestDelete();		
 	}
 }
 

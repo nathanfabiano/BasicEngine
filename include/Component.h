@@ -16,7 +16,9 @@ public:
 	virtual void Render() = 0;
 	virtual bool Is(std::string type) = 0;
 
-	virtual void Open(std::string file); //usado no sprite
+	virtual void Open(std::string file); //Usado em Sprite
+	virtual void Play(int times); //usado em Sound
+	virtual void OpenTileImg(std::string file);
 };
 
 #endif

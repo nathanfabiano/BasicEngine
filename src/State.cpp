@@ -5,6 +5,8 @@
 #include "Face.h"
 #include "Vec2.h"
 #include "Sound.h"
+#include "TileSet.h"
+#include "TileMap.h"
 //#include "Game.h"
  #define INCLUDE_SDL
  #include "SDL_include.h"
@@ -22,6 +24,16 @@ State::State() : m_quitRequest(false)
 
 	m_music.Open("assets/audio/stageState.ogg");
 	m_music.Play(-1);
+
+	GameObject* map = new GameObject(0.0f, 0.0f);
+	TileSet* tileSet = new TileSet(*map, 64, 64, "assets/img/tileset.png");
+	printf("afs\n");
+	Component* tileMap = new TileMap(*map, "assets/map/tileMap.txt", tileSet);
+	printf("afs2\n");
+	map->AddComponent(tileMap);
+	printf("pqp\n");
+
+	m_objectArray.emplace_back(map);
 }
 
 State::~State()
@@ -68,7 +80,14 @@ void State::Render()
 {
 	for (int i = 0; i < (int)m_objectArray.size(); ++i)
 	{
-		m_objectArray[i].get()->GetComponent("Sprite")->Render();
+		if (m_objectArray[i].get()->GetComponent("Sprite"))
+		{
+			m_objectArray[i].get()->GetComponent("Sprite")->Render();
+		}
+		if (m_objectArray[i].get()->GetComponent("tilemap"))
+		{
+			m_objectArray[i].get()->GetComponent("tilemap")->Render();
+		}
 	}
 }
 
@@ -133,15 +152,15 @@ void State::Input() {
 void State::AddObject(int mouseX, int mouseY)
 {
 	GameObject* gameObject = new GameObject(mouseX, mouseY);
-	//Set Sound 'boom'
-	Component* sound = new Sound(*gameObject, "assets/audio/boom.wav");
-	gameObject->AddComponent(sound);
 	//Set Face - HP system
-	Component* face = new Face(*gameObject);
+	Face* face = new Face(*gameObject);
 	gameObject->AddComponent(face);
 	//Sprite
-	Component* sprite = new Sprite(*gameObject, "assets/img/penguinface.png");
+	Sprite* sprite = new Sprite(*gameObject, "assets/img/penguinface.png");
 	gameObject->AddComponent(sprite);
+	//Set Sound 'boom'
+	Sound* sound = new Sound(*gameObject, "assets/audio/boom.wav");
+	gameObject->AddComponent(sound);
 
 	m_objectArray.emplace_back(gameObject);
 }

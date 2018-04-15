@@ -27,11 +27,11 @@ Sound::~Sound()
 
 void Sound::Open(std::string file)
 {
-	if (IsOpen())
+	/*if (IsOpen())
 	{
 		//delete m_chunk;
 		Mix_FreeChunk(m_chunk);
-	}
+	}*/
 	
 	m_chunk = Mix_LoadWAV(file.c_str());
 	if (!IsOpen())
@@ -45,7 +45,9 @@ void Sound::Play(int times)
 {
 	if (IsOpen())
 	{
+		std::cout << "Play Boom!" << std::endl; 
 		m_channel = Mix_PlayChannel(-1, m_chunk, times-1);
+		printf("%d\n", m_channel);
 	}
 }
 
@@ -53,7 +55,7 @@ void Sound::Stop()
 {
 	if (IsOpen())
 	{
-		Mix_HaltChannel(m_channel);
+		Mix_HaltChannel(10);
 	}
 }
 

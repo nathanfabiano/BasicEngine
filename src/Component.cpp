@@ -1,6 +1,7 @@
 #include "Component.h"
 #include "GameObject.h"
 
+
 Component::Component(GameObject &associated) : m_associated(associated)
 {
 
@@ -8,12 +9,20 @@ Component::Component(GameObject &associated) : m_associated(associated)
 
 Component::~Component()
 {
-	//ae
+	//
 }
 
 void Component::Open(std::string file)
 {
-	//
+	// Usado para o sprite background
 }
-//Destructor
-//O resto é pure virtual
+
+void Component::Play(int times)
+{
+	// Usado para o Sound
+}
+
+void Component::OpenTileImg(std::string file)
+{
+	
+}
