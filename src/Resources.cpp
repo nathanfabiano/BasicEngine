@@ -45,6 +45,7 @@ Mix_Music* Resources::GetMusic(std::string file)
 
 	if (music_ptr == m_musicTable.end()) //não achou, então cria uma nova music
 	{
+		std::cout << "Criou " << file << std::endl;
 		std::pair<std::string, Mix_Music*> newMusic(file, Mix_LoadMUS(file.c_str())); //cria a variavel newMusic com key 'file' e value apontado para a musica (load)
 		m_musicTable.insert(newMusic);
 		return m_musicTable.find(file)->second;
@@ -52,6 +53,7 @@ Mix_Music* Resources::GetMusic(std::string file)
 	else
 	{
 		//Achou
+		std::cout << "Achou " << file << std::endl;
 		return music_ptr->second;
 	}
 }
@@ -72,6 +74,7 @@ Mix_Chunk* Resources::GetSound(std::string file)
 
 	if (sound_ptr == m_soundTable.end()) //não achou, então cria uma nova music
 	{
+		std::cout << "Criou " << file << std::endl;
 		std::pair<std::string, Mix_Chunk*> newSound(file, Mix_LoadWAV(file.c_str())); //cria a variavel newSound com key 'file' e value apontado para o som (load)
 		m_soundTable.insert(newSound);
 		return m_soundTable.find(file)->second;
@@ -79,6 +82,7 @@ Mix_Chunk* Resources::GetSound(std::string file)
 	else
 	{
 		//Achou
+		std::cout << "Achou " << file << std::endl;
 		return sound_ptr->second;
 	}
 }
