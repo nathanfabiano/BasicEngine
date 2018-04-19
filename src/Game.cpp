@@ -10,22 +10,17 @@
 void Game::Run()
 {
 	Game* game = Game::GetInstance();
-	printf("2\n");
 	State* state = game->GetState();
 	//BackGround..
-	printf("1\n");
-	//state->GetGameObject(0)->GetComponent("Sprite")->Open("assets/img/ocean.jpg");
-	printf("blabla\n");
+	state->GetGameObject(0)->GetComponent("Sprite")->Open("assets/img/ocean.jpg");
+	state->GetGameObject(0)->box.h = 800;
 	state->GetGameObject(1)->GetComponent("tilemap")->OpenTileImg("assets/img/tileset.png");
-	printf("ae cassete\n");
 	while(!state->QuitRequest())
 	{
 		state->Update(0);
-		printf("up\n");
 		state->Render();
-		printf("render\n");
 		SDL_RenderPresent(game->GetRenderer());
-		SDL_Delay(500); //Aprox. 30FPS
+		SDL_Delay(100); //Aprox. 30FPS
 	}
 }
 
@@ -96,7 +91,7 @@ Game* Game::GetInstance()
 {
 	if(s_instance == 0)
 	{
-		s_instance = new Game("11/0134338", 800, 800);
+		s_instance = new Game("Nathan Fabiano Machado - 11/0134338", 800, 800);
 	}
 
 	return s_instance;

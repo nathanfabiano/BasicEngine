@@ -1,6 +1,7 @@
 #include "Sprite.h"
 #include "Game.h"
 #include "GameObject.h"
+#include "Resources.h"
  #define INCLUDE_SDL
  #define INCLUDE_SDL_IMAGE
  #include "SDL_include.h"
@@ -18,19 +19,17 @@ Sprite::Sprite(GameObject& associated, std::string file) : Component(associated)
 
 Sprite::~Sprite()
 {
-	//SDL_DestroyTexture(SDL_Texture*);
-	//???
+
 }
 
 void Sprite::Open(std::string file)
 {
 	Game* game = Game::GetInstance();
-	if (IsOpen())
-	{
-		SDL_DestroyTexture(m_texture);
-	}
 
-	m_texture = IMG_LoadTexture(game->GetRenderer(), file.c_str());
+	//m_texture = IMG_LoadTexture(game->GetRenderer(), file.c_str());
+	printf("agora vai\n");
+	m_texture = game->resources.GetImage(file);
+	printf("foi\n");
 	if (!IsOpen())
 	{
 		std::cout << "Unable to load texture: " << SDL_GetError();
@@ -47,7 +46,7 @@ void Sprite::SetClip(int x, int y, int w, int h) //Parametros (x,y,w,h) retirado
 	m_clipRect.x = x;
 	m_clipRect.y = y;
 	m_clipRect.w = w;
-	m_clipRect.h = w;
+	m_clipRect.h = h;
 }
 
 void Sprite::SetClip() //Parametros (x,y,w,h) retirados! Usa o associated.box
