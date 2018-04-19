@@ -16,8 +16,6 @@ private:
 	std::unordered_map<std::string, Mix_Chunk*> m_soundTable;
 
 public:
-	Resources();
-
 	SDL_Texture* GetImage(std::string file);
 	void ClearImages();
 

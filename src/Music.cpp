@@ -1,5 +1,6 @@
  
 #include "Music.h"
+#include "Game.h"
  #define INCLUDE_SDL
  #define INCLUDE_SDL_MIXER
  #include "SDL_include.h"
@@ -18,18 +19,13 @@ Music::Music(std::string file)
 
 void Music::Open(std::string file)
 {
-	if (IsOpen())
-	{
-		//delete m_music;
-		Mix_FreeMusic(m_music);
-	}
-	
-	m_music = Mix_LoadMUS(file.c_str());
+	Game* game = Game::GetInstance();
+	m_music = game->resources.GetMusic(file);
+	//m_music = Mix_LoadMUS(file.c_str());
 	if (!IsOpen())
 	{
 		std::cout << "Unable to load music: " << SDL_GetError();
         SDL_Log("Unable to load music: %s", SDL_GetError());
-        //return 1;
 	}
 }
 

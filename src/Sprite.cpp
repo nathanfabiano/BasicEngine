@@ -27,9 +27,7 @@ void Sprite::Open(std::string file)
 	Game* game = Game::GetInstance();
 
 	//m_texture = IMG_LoadTexture(game->GetRenderer(), file.c_str());
-	printf("agora vai\n");
 	m_texture = game->resources.GetImage(file);
-	printf("foi\n");
 	if (!IsOpen())
 	{
 		std::cout << "Unable to load texture: " << SDL_GetError();
@@ -82,7 +80,7 @@ void Sprite::Update(float dt)
 
 void Sprite::Render()
 {
-	printf("abestado\n");
+	//printf("abestado\n");
 	Render((int)m_associated.box.x, (int)m_associated.box.y, (int)m_associated.box.w, (int)m_associated.box.h);
 }
 

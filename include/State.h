@@ -25,6 +25,7 @@ public:
 	void AddObject(int mouseX, int mouseY);
 	GameObject* GetGameObject(int indice);
 
+	Music* GetMusic() { return &m_music; }; 
 	bool QuitRequest(){ return m_quitRequest; };
 };
 

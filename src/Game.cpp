@@ -11,17 +11,24 @@ void Game::Run()
 {
 	Game* game = Game::GetInstance();
 	State* state = game->GetState();
-	//BackGround..
+	//BackGround Load
 	state->GetGameObject(0)->GetComponent("Sprite")->Open("assets/img/ocean.jpg");
 	state->GetGameObject(0)->box.h = 800;
+	//Music Load and Play
+	state->GetMusic()->Open("assets/audio/stageState.ogg");
+	state->GetMusic()->Play(-1);
+	//TileMap Load
 	state->GetGameObject(1)->GetComponent("tilemap")->OpenTileImg("assets/img/tileset.png");
 	while(!state->QuitRequest())
 	{
 		state->Update(0);
 		state->Render();
 		SDL_RenderPresent(game->GetRenderer());
-		SDL_Delay(100); //Aprox. 30FPS
+		SDL_Delay(33); //Aprox. 30FPS
 	}
+	resources.ClearImages();
+	resources.ClearMusics();
+	resources.ClearSounds();
 }
 
 Game::Game(std::string title, int width, int height) : m_width(width), m_height(height), m_window(nullptr), m_renderer(nullptr), m_state(nullptr)

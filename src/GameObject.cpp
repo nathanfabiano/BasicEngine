@@ -12,12 +12,28 @@ GameObject::GameObject(float posX, float posY) : m_isDead(false)
 GameObject::~GameObject()
 {
 	//Component *cpt;
+	std::cout << "Azedo 1" << std::endl;
 	const int size = m_components.size() - 1;
+	std::cout << "components: " << size << std::endl;
 	for (int i = size; i >= 0 ; --i)
 	{
+		if (m_components[i]->Is("Sprite"))
+		{
+			std::cout << "delentando componente SPRITE" << std::endl;
+		}
+		if (m_components[i]->Is("SOUND"))
+		{
+			std::cout << "delentando componente SOUND" << std::endl;
+		}
+		if (m_components[i]->Is("FACE"))
+		{
+			std::cout << "delentando componente FACE" << std::endl;
+		}
 		delete m_components[i]; //???
+		std::cout << "Azedo 2" << std::endl;
 	}
 	m_components.clear();
+	std::cout << "Azedo 3" << std::endl;
 }
 
 void GameObject::Update(float dt)

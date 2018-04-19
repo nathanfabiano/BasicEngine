@@ -8,8 +8,8 @@
 #include "TileSet.h"
 #include "TileMap.h"
 //#include "Game.h"
- #define INCLUDE_SDL
- #include "SDL_include.h"
+#define INCLUDE_SDL
+#include "SDL_include.h"
 
 #define PI 3.1415926535
 
@@ -22,8 +22,8 @@ State::State() : m_quitRequest(false)
 
 	m_objectArray.emplace_back(gameObject);
 
-	m_music.Open("assets/audio/stageState.ogg");
-	m_music.Play(-1);
+	//m_music.Open("assets/audio/stageState.ogg");
+	//m_music.Play(-1);
 
 	GameObject* map = new GameObject(0.0f, 0.0f);
 	TileSet* tileSet = new TileSet(*map, 64, 64, "assets/img/tileset.png");
@@ -66,12 +66,16 @@ do elemento.
 	*/
 
 	Input();
+	//std::cout << "t1" << std::endl;
 	for (int i = 0; i < (int)m_objectArray.size(); ++i)
 	{
+		//std::cout << "t2" << std::endl;
 		m_objectArray[i].get()->Update(dt);
 		if (m_objectArray[i].get()->IsDead())
 		{
+			std::cout << "t4" << std::endl;
 			m_objectArray.erase(m_objectArray.begin()+i);
+			//m_objectArray.erase(m_objectArray[i]);
 		}
 	}
 }

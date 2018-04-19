@@ -1,6 +1,7 @@
 #include "Sound.h"
 #include "GameObject.h"
 #include "Component.h"
+#include "Game.h"
 #include <iostream>
  #define INCLUDE_SDL
  #define INCLUDE_SDL_MIXER
@@ -18,22 +19,18 @@ Sound::Sound(GameObject& associated, std::string file) : Component(associated), 
 
 Sound::~Sound()
 {
-	if (IsOpen())
+	/*if (IsOpen())
 	{
 		Stop();
 		Mix_FreeChunk(m_chunk);
-	}
+	}*/
 }
 
 void Sound::Open(std::string file)
 {
-	/*if (IsOpen())
-	{
-		//delete m_chunk;
-		Mix_FreeChunk(m_chunk);
-	}*/
-	
-	m_chunk = Mix_LoadWAV(file.c_str());
+	Game* game = Game::GetInstance();
+	m_chunk = game->resources.GetSound(file);
+	//m_chunk = Mix_LoadWAV(file.c_str());
 	if (!IsOpen())
 	{
 		std::cout << "Unable to load sound: " << SDL_GetError();
@@ -45,9 +42,9 @@ void Sound::Play(int times)
 {
 	if (IsOpen())
 	{
-		std::cout << "Play Boom!" << std::endl; 
+		std::cout << "Play Boom!" << std::endl;
 		m_channel = Mix_PlayChannel(-1, m_chunk, times-1);
-		printf("%d\n", m_channel);
+		printf("%d %s\n", m_channel, SDL_GetError());
 	}
 }
 
