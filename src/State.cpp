@@ -7,6 +7,7 @@
 #include "Sound.h"
 #include "TileSet.h"
 #include "TileMap.h"
+#include "InputManager.h"
 //#include "Game.h"
 #define INCLUDE_SDL
 #include "SDL_include.h"
@@ -64,9 +65,17 @@ Sendo assim, para obter o iterador exigido como argumento de
 vector::erase, use o iterador de início (vector::begin) somado à posição
 do elemento.
 	*/
-
-	Input();
-	//std::cout << "t1" << std::endl;
+	InputManager& input = InputManager::GetInstance();
+	//CRIAR PENGUIN
+	if (input.KeyPress(' '))
+	{
+		Vec2 objPos = Vec2( 200, 0 );
+		Vec2 objPos2 = Vec2( input.GetMouseX(), input.GetMouseY() );
+		objPos = (objPos.GetRotated( -PI + PI*(rand() % 1001)/500.0 ));
+		objPos = objPos + objPos2;
+		AddObject((int)objPos.x, (int)objPos.y);
+	}
+	//DESTROI OBJETOS
 	for (int i = 0; i < (int)m_objectArray.size(); ++i)
 	{
 		//std::cout << "t2" << std::endl;
@@ -95,7 +104,7 @@ void State::Render()
 	}
 }
 
-void State::Input() {
+/*void State::Input() {
 	SDL_Event event;
 	int mouseX, mouseY;
 
@@ -151,7 +160,7 @@ void State::Input() {
 			}
 		}
 	}
-}
+}*/
 
 void State::AddObject(int mouseX, int mouseY)
 {

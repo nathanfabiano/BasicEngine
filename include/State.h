@@ -21,7 +21,7 @@ public:
 	void LoadAssets();
 	void Update(float dt);
 	void Render();
-	void Input();
+	//void Input();
 	void AddObject(int mouseX, int mouseY);
 	GameObject* GetGameObject(int indice);
 

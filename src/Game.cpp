@@ -4,12 +4,14 @@
  #define INCLUDE_SDL_MIXER
  #include "SDL_include.h"
  #include "Game.h"
+ #include "InputManager.h"
  #include "State.h"
  #include <iostream>
 
 void Game::Run()
 {
 	Game* game = Game::GetInstance();
+	InputManager& input = InputManager::GetInstance();
 	State* state = game->GetState();
 	//BackGround Load
 	state->GetGameObject(0)->GetComponent("Sprite")->Open("assets/img/ocean.jpg");
@@ -19,8 +21,9 @@ void Game::Run()
 	state->GetMusic()->Play(-1);
 	//TileMap Load
 	state->GetGameObject(1)->GetComponent("tilemap")->OpenTileImg("assets/img/tileset.png");
-	while(!state->QuitRequest())
+	while(!input.QuitRequested())
 	{
+		input.Update();
 		state->Update(0);
 		state->Render();
 		SDL_RenderPresent(game->GetRenderer());
@@ -77,7 +80,6 @@ Game::Game(std::string title, int width, int height) : m_width(width), m_height(
 	}
 	//Inicializar STATE
 	m_state = new State();
-
 }
 
 Game::~Game()

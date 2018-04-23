@@ -1,6 +1,7 @@
 #include "Face.h"
 #include "GameObject.h"
 #include "Component.h"
+#include "InputManager.h"
 #include <iostream>
 
 Face::Face(GameObject& associated) : Component(associated), m_hitpoints(10)
@@ -20,7 +21,12 @@ void Face::Damage(int damage)
 
 void Face::Update(float dt)
 {
-
+	//DA DANO NO PENGUIN
+	InputManager& input = InputManager::GetInstance();
+	if ((input.MousePress(1))&&(m_associated.box.Contains((float)input.GetMouseX(), (float)input.GetMouseY())))
+	{
+		this->Damage(std::rand() % 10 + 10);
+	}
 }
 
 void Face::Render()
