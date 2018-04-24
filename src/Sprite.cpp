@@ -80,8 +80,8 @@ void Sprite::Update(float dt)
 
 void Sprite::Render()
 {
-	//printf("abestado\n");
-	Render((int)m_associated.box.x, (int)m_associated.box.y, (int)m_associated.box.w, (int)m_associated.box.h);
+	Game* game = Game::GetInstance();
+	Render((int)(m_associated.box.x - game->GetState()->camera.pos.x) , (int)(m_associated.box.y - game->GetState()->camera.pos.y), (int)m_associated.box.w, (int)m_associated.box.h);
 }
 
 void Sprite::Render(int x, int y, int w, int h)

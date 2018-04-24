@@ -4,10 +4,13 @@
 #include "Music.h"
 #include "Face.h"
 #include "Vec2.h"
+#include "Game.h"
 #include "Sound.h"
 #include "TileSet.h"
 #include "TileMap.h"
 #include "InputManager.h"
+#include "Camera.h"
+#include "CameraFollower.h"
 //#include "Game.h"
 #define INCLUDE_SDL
 #include "SDL_include.h"
@@ -19,7 +22,9 @@ State::State() : m_quitRequest(false)
 	GameObject* gameObject = new GameObject(512.0f, 300.0f);
 
 	Component* sprite = new Sprite(*gameObject);
+	Component* camFollower = new CameraFollower(*gameObject);
 	gameObject->AddComponent(sprite);
+	gameObject->AddComponent(camFollower);
 
 	m_objectArray.emplace_back(gameObject);
 
@@ -28,11 +33,8 @@ State::State() : m_quitRequest(false)
 
 	GameObject* map = new GameObject(0.0f, 0.0f);
 	TileSet* tileSet = new TileSet(*map, 64, 64, "assets/img/tileset.png");
-	printf("afs\n");
 	Component* tileMap = new TileMap(*map, "assets/map/tileMap.txt", tileSet);
-	printf("afs2\n");
 	map->AddComponent(tileMap);
-	printf("pqp\n");
 
 	m_objectArray.emplace_back(map);
 }
@@ -67,6 +69,7 @@ do elemento.
 	*/
 	InputManager& input = InputManager::GetInstance();
 	//CRIAR PENGUIN
+	camera.Update(dt);
 	if (input.KeyPress(' '))
 	{
 		Vec2 objPos = Vec2( 200, 0 );
@@ -164,7 +167,8 @@ void State::Render()
 
 void State::AddObject(int mouseX, int mouseY)
 {
-	GameObject* gameObject = new GameObject(mouseX, mouseY);
+	Game* game = Game::GetInstance();
+	GameObject* gameObject = new GameObject(mouseX + (int)game->GetState()->camera.pos.x, mouseY + (int)game->GetState()->camera.pos.y);
 	//Set Face - HP system
 	Face* face = new Face(*gameObject);
 	gameObject->AddComponent(face);

@@ -1,5 +1,5 @@
 #include "TileSet.h"
-#include "Sprite.h"
+//#include "Sprite.h"
 #include "GameObject.h"
 #include <iostream>
 
@@ -34,6 +34,7 @@ void TileSet::RenderTile(unsigned index, float x, float y)
 		indexColumns = index - (indexRows * m_columns);
 
 		m_tileSet.SetClip(indexColumns*m_tileWidth, indexRows*m_tileHeight, m_tileWidth, m_tileHeight);
+		//Correção de camera
 		m_tileSet.Render(x, y, m_tileWidth/m_scale, m_tileHeight/m_scale);
 	}
 }

@@ -1,6 +1,7 @@
 #include "TileMap.h"
 #include "GameObject.h"
 #include "TileSet.h"
+#include "Game.h"
 //#include <stdio>
 
 
@@ -55,7 +56,7 @@ void TileMap::RenderLayer(int layer, int cameraX, int cameraY)
 	int index;
 	int tileWidth = m_tileSet->GetTileWidth();
 	int tileHeight = m_tileSet->GetTileHeight();
-	m_tileSet->SetScale(2);
+	m_tileSet->SetScale(1);
 
 	for (int y = 0; y < m_mapHeight; ++y)
 	{
@@ -63,8 +64,8 @@ void TileMap::RenderLayer(int layer, int cameraX, int cameraY)
 		{
 			index = At(x, y, layer);
 			if(m_tileMatrix[index] != 0)
-			{
-				m_tileSet->RenderTile((m_tileMatrix[index]-1), x*tileWidth/m_tileSet->GetScale(), y*tileHeight/m_tileSet->GetScale());
+			{	// Render Tile com correção da camera aplicada
+				m_tileSet->RenderTile((m_tileMatrix[index]-1), ((x*tileWidth/m_tileSet->GetScale()) - cameraX), ((y*tileHeight/m_tileSet->GetScale()) - cameraY));
 			}
 		}
 	}
@@ -72,9 +73,10 @@ void TileMap::RenderLayer(int layer, int cameraX, int cameraY)
 
 void TileMap::Render()
 {
+	Game* game = Game::GetInstance();
 	for (int i = 0; i < m_mapDepth; ++i)
 	{
-		RenderLayer(i);
+		RenderLayer(i, game->GetState()->camera.pos.x, game->GetState()->camera.pos.y);
 	}
 }
 

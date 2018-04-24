@@ -14,6 +14,7 @@ private:
 	int m_width;
 	int m_height;
 	SDL_Rect m_clipRect;
+	bool m_relativPosition;
 public:
 	Sprite(GameObject& associated);
 	Sprite(GameObject& associated, std::string file);

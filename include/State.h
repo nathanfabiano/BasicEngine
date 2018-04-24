@@ -7,6 +7,7 @@
 #include "GameObject.h"
 #include "Sprite.h"
 #include "Music.h"
+#include "Camera.h"
 
 class State
 {
@@ -14,8 +15,10 @@ private:
 	Music m_music;
 	bool m_quitRequest;
 	std::vector<std::unique_ptr<GameObject>> m_objectArray;
-
+	
 public:
+	Camera camera;
+	
 	State();
 	~State();
 	void LoadAssets();

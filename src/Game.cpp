@@ -15,7 +15,7 @@ void Game::Run()
 	State* state = game->GetState();
 	//BackGround Load
 	state->GetGameObject(0)->GetComponent("Sprite")->Open("assets/img/ocean.jpg");
-	state->GetGameObject(0)->box.h = 800;
+	//state->GetGameObject(0)->box.h = 800;
 	//Music Load and Play
 	state->GetMusic()->Open("assets/audio/stageState.ogg");
 	state->GetMusic()->Play(-1);
@@ -23,8 +23,10 @@ void Game::Run()
 	state->GetGameObject(1)->GetComponent("tilemap")->OpenTileImg("assets/img/tileset.png");
 	while(!input.QuitRequested())
 	{
+		CalculateDeltaTime();
+		//std::cout << "DeltaTime: " << GetDeltaTime() << std::endl;
 		input.Update();
-		state->Update(0);
+		state->Update(game->GetDeltaTime());
 		state->Render();
 		SDL_RenderPresent(game->GetRenderer());
 		SDL_Delay(33); //Aprox. 30FPS
@@ -34,7 +36,7 @@ void Game::Run()
 	resources.ClearSounds();
 }
 
-Game::Game(std::string title, int width, int height) : m_width(width), m_height(height), m_window(nullptr), m_renderer(nullptr), m_state(nullptr)
+Game::Game(std::string title, int width, int height) : m_width(width), m_height(height), m_window(nullptr), m_renderer(nullptr), m_state(nullptr), m_frameStart{}, m_dt{}
 {
 	m_title = title;
 	//Inicializa as bibliotecas SDL, SDL_img e SDL_mixer
@@ -100,8 +102,15 @@ Game* Game::GetInstance()
 {
 	if(s_instance == 0)
 	{
-		s_instance = new Game("Nathan Fabiano Machado - 11/0134338", 800, 800);
+		s_instance = new Game("Nathan Fabiano Machado - 11/0134338", 1024, 600);
 	}
 
 	return s_instance;
+}
+
+void Game::CalculateDeltaTime()
+{
+	int currentFrame = SDL_GetTicks();
+	m_dt = ((float)(currentFrame - m_frameStart)/1000.0f); //dt em segundos
+	m_frameStart = currentFrame;
 }

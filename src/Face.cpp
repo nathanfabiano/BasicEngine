@@ -1,6 +1,7 @@
 #include "Face.h"
 #include "GameObject.h"
 #include "Component.h"
+#include "Game.h"
 #include "InputManager.h"
 #include <iostream>
 
@@ -22,8 +23,9 @@ void Face::Damage(int damage)
 void Face::Update(float dt)
 {
 	//DA DANO NO PENGUIN
+	Game* game = Game::GetInstance();
 	InputManager& input = InputManager::GetInstance();
-	if ((input.MousePress(1))&&(m_associated.box.Contains((float)input.GetMouseX(), (float)input.GetMouseY())))
+	if ((input.MousePress(1))&&(m_associated.box.Contains((float)(input.GetMouseX() + game->GetState()->camera.pos.x), (float)(input.GetMouseY() + game->GetState()->camera.pos.y))))
 	{
 		this->Damage(std::rand() % 10 + 10);
 	}

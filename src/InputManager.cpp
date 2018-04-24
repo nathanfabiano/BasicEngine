@@ -79,7 +79,7 @@ void InputManager::Update()
 			if (m_keyState[key])
 			{
 				m_keyUpdate[key] = m_updateCounter;
-				std::cout << "Tecla '" << (char)key << "' up!" << std::endl;
+				std::cout << "Tecla '" << key << "' up!" << std::endl;
 			}
 			m_keyState[key] = false;
 		}

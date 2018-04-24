@@ -110,6 +110,16 @@ Vec2 operator*(float escalar, Vec2 v1)
 	return Vec2(v1.x * escalar, v1.y * escalar);
 }
 
+Vec2 operator/(Vec2 v1, int escalar)
+{
+	return Vec2(v1.x / (float)escalar, v1.y / (float)escalar);
+}
+
+Vec2 operator/(Vec2 v1, float escalar)
+{
+	return Vec2(v1.x / escalar, v1.y / escalar);
+}
+
 Rect operator+(Rect r, Vec2 v)
 {
 	r.x += v.x;
