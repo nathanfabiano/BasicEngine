@@ -27,10 +27,13 @@ public:
 
 	friend Vec2 operator+(Vec2 v1, Vec2 v2);
 	friend Vec2 operator-(Vec2 v1, Vec2 v2);
+
 	friend Vec2 operator*(Vec2 v1, int escalar);
 	friend Vec2 operator*(int escalar, Vec2 v1);
 	friend Vec2 operator*(Vec2 v1, float escalar);
 	friend Vec2 operator*(float escalar, Vec2 v1);
+	friend Vec2 operator*(Vec2 v1, Vec2 v2);
+	
 	friend Vec2 operator/(Vec2 v1, int escalar);
 	friend Vec2 operator/(Vec2 v1, float escalar);
 };

@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "GameObject.h"
+#include "Vec2.h"
 
 
 class Component //Abstract
@@ -18,7 +19,8 @@ public:
 
 	virtual void Open(std::string file); //Usado em Sprite
 	virtual void Play(int times); //usado em Sound
-	virtual void OpenTileImg(std::string file);
+	virtual void OpenTileImg(std::string file); //Usado em Tile
+	virtual Vec2 GetCameraPos(); //Usado em Parallax
 };
 
 #endif

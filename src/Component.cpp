@@ -26,3 +26,8 @@ void Component::OpenTileImg(std::string file)
 {
 	
 }
+
+Vec2 Component::GetCameraPos()
+{
+	return Vec2(0, 0);
+}

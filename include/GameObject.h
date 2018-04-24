@@ -16,9 +16,11 @@ public:
 
 	GameObject(float posX, float posY);
 	~GameObject();
+	
 	void Update(float dt);
 	void Render();
 	bool IsDead();
+
 	void RequestDelete();
 	void AddComponent(Component* cpt);
 	void RemoveComponent(Component* cpt);

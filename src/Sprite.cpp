@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "GameObject.h"
 #include "Resources.h"
+#include "Parallax.h"
  #define INCLUDE_SDL
  #define INCLUDE_SDL_IMAGE
  #include "SDL_include.h"
@@ -81,7 +82,16 @@ void Sprite::Update(float dt)
 void Sprite::Render()
 {
 	Game* game = Game::GetInstance();
-	Render((int)(m_associated.box.x - game->GetState()->camera.pos.x) , (int)(m_associated.box.y - game->GetState()->camera.pos.y), (int)m_associated.box.w, (int)m_associated.box.h);
+	if (m_associated.GetComponent("Parallax") == nullptr)
+	{
+		Render((int)(m_associated.box.x - game->GetState()->camera.pos.x) , (int)(m_associated.box.y - game->GetState()->camera.pos.y), (int)m_associated.box.w, (int)m_associated.box.h);
+	}
+	else
+	{
+		Component* parallax = m_associated.GetComponent("Parallax");
+		Render((int)(m_associated.box.x - parallax->GetCameraPos().x) , (int)(m_associated.box.y - parallax->GetCameraPos().y), (int)m_associated.box.w, (int)m_associated.box.h);
+	}
+	
 }
 
 void Sprite::Render(int x, int y, int w, int h)

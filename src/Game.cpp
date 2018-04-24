@@ -5,6 +5,7 @@
  #include "SDL_include.h"
  #include "Game.h"
  #include "InputManager.h"
+ #include "Parallax.h"
  #include "State.h"
  #include <iostream>
 
@@ -14,7 +15,10 @@ void Game::Run()
 	InputManager& input = InputManager::GetInstance();
 	State* state = game->GetState();
 	//BackGround Load
-	state->GetGameObject(0)->GetComponent("Sprite")->Open("assets/img/ocean.jpg");
+	GameObject* bg = state->GetGameObject(0);
+	bg->GetComponent("Sprite")->Open("assets/img/ocean.jpg");
+	//Component* parallax = new Parallax(*bg, 50);
+	//bg->AddComponent(parallax);
 	//state->GetGameObject(0)->box.h = 800;
 	//Music Load and Play
 	state->GetMusic()->Open("assets/audio/stageState.ogg");
