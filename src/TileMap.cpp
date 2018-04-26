@@ -76,7 +76,14 @@ void TileMap::Render()
 	Game* game = Game::GetInstance();
 	for (int i = 0; i < m_mapDepth; ++i)
 	{
-		RenderLayer(i, game->GetState()->camera.pos.x, game->GetState()->camera.pos.y);
+		if (i == 1)
+		{
+			RenderLayer(i, game->GetState()->camera.GetParallaxPos(-30).x, game->GetState()->camera.GetParallaxPos(-30).y);
+		}
+		else
+		{
+			RenderLayer(i, game->GetState()->camera.pos.x, game->GetState()->camera.pos.y);
+		}
 	}
 }
 

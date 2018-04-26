@@ -5,7 +5,6 @@
  #include "SDL_include.h"
  #include "Game.h"
  #include "InputManager.h"
- #include "Parallax.h"
  #include "State.h"
  #include <iostream>
 

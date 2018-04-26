@@ -46,3 +46,29 @@ void Camera::Update(float dt)
 		pos = m_focus->box.GetPosition();
 	}
 }
+
+Vec2 Camera::GetParallaxPos(int depth)
+{
+	float coefficient = CalculateSpeedMulti(depth);
+
+	return Vec2(pos.x * coefficient, pos.y * coefficient);
+}
+
+float Camera::CalculateSpeedMulti(int depth)
+{
+	//Clamp -100 ~ 100
+	if (depth > 100)
+	{
+		depth = 100;
+	}
+	else
+	{
+		if (depth < -100)
+		{
+			depth = -100;
+		}
+	}
+	int complement = 100 - depth;
+	
+	return (((float)complement)/100.0f);
+}

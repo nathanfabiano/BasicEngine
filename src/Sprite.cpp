@@ -2,7 +2,6 @@
 #include "Game.h"
 #include "GameObject.h"
 #include "Resources.h"
-#include "Parallax.h"
  #define INCLUDE_SDL
  #define INCLUDE_SDL_IMAGE
  #include "SDL_include.h"
