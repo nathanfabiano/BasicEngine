@@ -11,11 +11,13 @@ class GameObject
 private:
 	std::vector <Component*> m_components;
 	bool m_isDead;
+	bool m_started;
 public:
 	Rect box;
 
 	GameObject(float posX, float posY);
 	~GameObject();
+	void Start();
 	
 	void Update(float dt);
 	void Render();

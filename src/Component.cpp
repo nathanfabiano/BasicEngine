@@ -12,6 +12,11 @@ Component::~Component()
 	//
 }
 
+void Component::Start()
+{
+	std::cout << "Component Started" << std::endl;
+}
+
 void Component::Open(std::string file)
 {
 	// Usado para o sprite background

@@ -3,7 +3,7 @@
 #include "Rect.h"
 #include <iostream>
 
-GameObject::GameObject(float posX, float posY) : m_isDead(false)
+GameObject::GameObject(float posX, float posY) : m_isDead{}, m_started{}
 {
 	box.x = posX;
 	box.y = posY;
@@ -34,6 +34,16 @@ GameObject::~GameObject()
 	}
 	m_components.clear();
 	std::cout << "Azedo 3" << std::endl;
+}
+
+void GameObject::Start()
+{
+	std::cout << "GO Started" << std::endl;
+	for (int i = 0; i < (int)m_components.size() ; ++i)
+	{
+		m_components[i]->Start();
+	}
+	m_started = true;
 }
 
 void GameObject::Update(float dt)
@@ -67,6 +77,10 @@ void GameObject::RequestDelete()
 void GameObject::AddComponent(Component* cpt)
 {
 	m_components.insert(m_components.end(), cpt);
+	if (m_started)
+	{
+		cpt->Start();
+	}
 }
 
 void GameObject::RemoveComponent(Component* cpt)
@@ -74,7 +88,7 @@ void GameObject::RemoveComponent(Component* cpt)
 	const int size = m_components.size();
 	for (int i = 0; i < size ; ++i)
 	{
-		if(m_components[i] == cpt) // encontra o componente desejado no vector de Component????
+		if(m_components[i] == cpt) // encontra o componente desejado no vector de Component
 		{
 			// deleta component
 			delete m_components[i];
@@ -92,9 +106,8 @@ Component* GameObject::GetComponent(std::string type)
 {
 	for (int i = 0; i < (int)m_components.size() ; ++i)
 	{
-		if(m_components[i]->Is(type)) // encontra o componente desejado no vector de Component????
+		if(m_components[i]->Is(type)) // encontra o componente desejado no vector de Component
 		{
-			//printf("type found: %s\n", type.c_str());
 			return m_components[i];
 		}
 	}

@@ -14,7 +14,8 @@ class State
 private:
 	Music m_music;
 	bool m_quitRequest;
-	std::vector<std::unique_ptr<GameObject>> m_objectArray;
+	bool m_started;
+	std::vector<std::shared_ptr<GameObject>> m_objectArray;
 	
 public:
 	Camera camera;
@@ -26,7 +27,11 @@ public:
 	void Render();
 	//void Input();
 	void AddObject(int mouseX, int mouseY);
+	std::weak_ptr<GameObject> AddObject(GameObject* go);
+	std::weak_ptr<GameObject> GetObjectPtr(GameObject* go);
 	GameObject* GetGameObject(int indice);
+
+	void Start();
 
 	Music* GetMusic() { return &m_music; }; 
 	bool QuitRequest(){ return m_quitRequest; };

@@ -24,6 +24,7 @@ void Game::Run()
 	state->GetMusic()->Play(-1);
 	//TileMap Load
 	state->GetGameObject(1)->GetComponent("tilemap")->OpenTileImg("assets/img/tileset.png");
+	state->Start();
 	while(!input.QuitRequested())
 	{
 		CalculateDeltaTime();
